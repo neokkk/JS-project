@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>지뢰찾기</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            border: 1px solid gray;
+            width : 20px;
+            height: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <input id="hor" type="number" placeholder="가로" value="10">
+    <input id="ver" type="number" placeholder="세로" value="10">
+    <input id="mine" type="number" placeholder="지뢰" value="20">
+    <button id="exec">실행</button>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <td><span id="timer">0</span>초</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    
+    <script src="mine-swipper.js"></script>
+</body>
+</html>
