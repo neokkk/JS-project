@@ -1,19 +1,11 @@
 // 레이아웃 설정
 const body = document.body;
-const result = document.createElement('h1');
-const resultSub = document.createElement('h2');
-const form = document.createElement('form');
-const btn = document.createElement('button');
-const input = document.createElement('input');
+const result = document.querySelector('h1');
+const resultSub = document.querySelector('h2');
+const form = document.querySelector('form');
+const btn = document.querySelector('button');
+const input = document.querySelector('input');
 
-body.append(result);
-body.append(resultSub);
-body.append(form);
-form.append(input);
-form.append(btn);
-input.type = 'text';
-input.maxLength = 4;
-btn.textContent = '입력';
 
 // 내부 데이터 변경
 let numNomi;
