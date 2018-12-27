@@ -45,7 +45,7 @@ function loadTodos(){
     if(todos !== null){
         // todos
         const parsedTodos = JSON.parse(todos);
-        parsedTodos.forEach(function(todo){
+        parsedTodos.forEach((todo) => {
             paintTodo(todo.text);
         });
     }
