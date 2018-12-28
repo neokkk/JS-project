@@ -1,7 +1,17 @@
+const dataObject = {
+    openedColumn : -1,
+    questionary : -2,
+    flag : -3,
+    flag_mine : -4,
+    question_mine : -5,
+    mine : 1,
+    normalColumn : 0
+};
 const tbody = document.querySelector('#table tbody');
 let openedColumnNum = 0;
 let endFlag = false;
 let dataset = [];
+
 
 document.querySelector('#exec').addEventListener('click', function(){
     // 기존 데이터 초기화
@@ -29,7 +39,7 @@ document.querySelector('#exec').addEventListener('click', function(){
     while(mineSwipping.length > hor * ver - mine){
         const move = mineSwipping.splice(Math.floor(Math.random() * mineSwipping.length), 1)[0];
         shupple.push(move);
-    };
+    }
 
     // 지뢰 테이블 만들기
     for(let i = 0; i < ver; i++){
@@ -38,7 +48,7 @@ document.querySelector('#exec').addEventListener('click', function(){
         dataset.push(arr);
 
         for(let j = 0; j < hor; j++){
-            arr.push(1);
+            arr.push(dataObject.normalColumn);
             const td = document.createElement('td');
             // 오른쪽 클릭
             td.addEventListener('contextmenu', (e) => {
@@ -55,16 +65,39 @@ document.querySelector('#exec').addEventListener('click', function(){
 
                 if(e.currentTarget.textContent === '' || e.currentTarget.textContent === 'x'){
                     e.currentTarget.textContent = '!';
+                    e.currentTarget.classList.add('flag');
+
+                    if(dataset[row][column] === dataObject.mine){
+                        dataset[row][column] = dataObject.flag_mine;
+                    } else {
+                        dataset[row][column] = dataObject.flag;
+                    }
+
                 } else if(e.currentTarget.textContent === '!'){
                     e.currentTarget.textContent = '?';
-                } else if(e.currentTarget.textContent === '?'){
-                    if(dataset[row][column] === 1){
-                        e.currentTarget.textContent = '';
-                    } else if( dataset[row][column] === 'x'){
-                        e.currentTarget.textContent = 'x';
+                    e.currentTarget.classList.remove('flag');
+                    e.currentTarget.classList.add('question');
+
+                    if(dataset[row][column] === dataObject.flag_mine){
+                        dataset[row][column] = dataObject.question_mine;
+                    } else {
+                        dataset[row][column] = dataObject.questionary;
                     }
+
+                } else if(e.currentTarget.textContent === '?'){
+                    e.currentTarget.classList.remove('question');
+
+                    if(dataset[row][column] ===  dataObject.question_mine){
+                        e.currentTarget.textContent = 'x';
+                        dataset[row][column] = dataObject.mine;
+                    } else {
+                        e.currentTarget.textContent = '';
+                        dataset[row][column] = dataObject.normalColumn;
+                    }
+
                 }
             });
+
             // 왼쪽 클릭
             td.addEventListener('click', (e) => {
                 if(endFlag){
@@ -77,21 +110,22 @@ document.querySelector('#exec').addEventListener('click', function(){
                 const column = Array.prototype.indexOf.call(parentTr.children, e.currentTarget);
                 const row = Array.prototype.indexOf.call(parentTbody.children, parentTr);
 
-                if(dataset[row][column] === 1){
+                if([dataObject.openedColumn, dataObject.flag, dataObject.flag_mine, dataObject.question_mine, dataObject.questionary].includes(dataset[row][column])){
                     return;
                 }
 
                 // 클릭했을 때 배경 색 바꾸기
                 e.currentTarget.classList.add('opened');
-                openedColumnNum ++;
+                openedColumnNum++;
 
-                if(dataset[row][column] === 'x'){
+                // 지뢰 클릭했을 때
+                if(dataset[row][column] === dataObject.mine){
                     e.currentTarget.textContent = '펑';
                     document.querySelector("#result").textContent = '실패';
                     endFlag = true;
-                } else {
+                } else { // 지뢰가 아닐 경우
                     let sideArr = [
-                            dataset[row][column - 1],                               dataset[row][column + 1],
+                            dataset[row][column - 1], dataset[row][column + 1],
                         ];
 
                     // 윗 칸이 없는 경우 에러 처리
@@ -103,15 +137,14 @@ document.querySelector('#exec').addEventListener('click', function(){
                         sideArr = sideArr.concat([dataset[row + 1][column - 1], dataset[row + 1][column + 1], dataset[row + 1][column + 1]]);
                     }
 
-
+                    // 주변 지뢰 갯수
                     const sideMineNum = sideArr.filter((value) => {
-                        return value === 'x';
+                        return [dataObject.mine, dataObject.flag_mine, dataObject.question_mine].includes(value);
                     }).length;
 
                     // 거짓인 값 : false, '', 0, null, undefined, NaN
                     e.currentTarget.textContent = sideMineNum || '';
-
-                    dataset[row][column] = 1;
+                    dataset[row][column] = dataObject.openedColumn;
 
                     // 주변 지뢰 갯수가 0개면
                     if(sideMineNum === 0){
@@ -142,12 +175,13 @@ document.querySelector('#exec').addEventListener('click', function(){
                             const column = Array.prototype.indexOf.call(parentTr.children, mine);
                             const row = Array.prototype.indexOf.call(parentTbody.children, parentTr);
 
-                            if(dataset[row][column] !== 1){
+                            if(dataset[row][column] !== dataObject.openedColumn){
                                 mine.click();
                             }
                         });
                     }
                 }
+
                 if(openedColumnNum === hor * ver - mine){
                     endFlag = true;
                     document.querySelector('#result').textContent = '승리!';
@@ -156,24 +190,16 @@ document.querySelector('#exec').addEventListener('click', function(){
 
             tr.appendChild(td);
         }
+
         tbody.appendChild(tr);
     }
 
     // 지뢰 심기
     for(let i = 0; i < shupple.length; i++){
-        let column = Math.floor(shupple[i] / 10);
-        let row = shupple[i] % 10;
+        let column = Math.floor(shupple[i] / ver);
+        let row = shupple[i] % ver;
 
-        tbody.children[column].children[row].textContent = 'x';
-        dataset[column][row] = 'x';
+        tbody.children[row].children[column].textContent = 'x';
+        dataset[row][column] = dataObject.mine;
     }
-    console.log(dataset);
-
-    // for(let i = 0; i < shupple.length; i++){
-    //     (function closure(j){
-    //         setTimeout(() => {
-    //             console.log(j);
-    //         }, j * 1000);
-    //     })(i);
-    // }
 });
