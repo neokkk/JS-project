@@ -2,9 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <link rel="stylesheet" href="todolist.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <title>To Do List</title>
 </head>
 <body>
-$END$
+<div class="container">
+    <header>
+        <h1>What should I have <span>TO DO</span>?</h1>
+    </header>
+
+    <div class="main_wrap">
+        <div class="main">
+            <div class="main_top">
+                <i class="fas fa-caret-left fa-2x icon-color"></i>
+                <h3 id="main_date">12/31</h3>
+                <i class="fas fa-caret-right fa-2x icon-color"></i>
+            </div>
+            <div class="main_bottom">
+                <ul class="highLight">
+                </ul>
+            </div>
+        </div>
+
+        <div class="main_left">
+            <h4>ADD</h4>
+            <form id="main_frm">
+                <input type="text" id="main_input" autofocus required>
+            </form>
+        </div>
+
+        <div class="main_right">
+            <h4>DELETE</h4>
+        </div>
+    </div>
+</div>
+
+<script src="todolist.js"></script>
+<script src="caledar.js"></script>  
+    
 </body>
 </html>

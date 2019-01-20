@@ -1,0 +1,132 @@
+*{
+    font-family: "OTMGothicT";
+    font-weight: lighter;
+    box-sizing: border-box;
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+header{
+    width: 100%;
+    height: 200px;
+    color: #ffc600;
+    text-align: center;
+    font-size: 2rem;
+}
+header h1{
+    margin: 0;
+    line-height: 200px;
+}
+header h1 span{
+    font-weight: bold;
+}
+
+.main_wrap{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.main{
+    width: 400px;
+    height: 500px;
+    margin-top: 20px;
+    order: 2;
+}
+.main_top{
+    width: 100%;
+    height: 70px;
+    border: 1px solid #ffc600;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.main_top h3{
+    color: #ffc600;
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin: 0;
+}
+.main_top .icon-color{
+    color: #ffc600;
+}
+
+.main_bottom{
+    width: 100%;
+    height: 430px;
+    background-color: #ffc600;
+}
+.main_bottom ul{
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+        -ms-overflow-style: none;
+}
+.main_bottom ul::-webkit-scrollbar { display: none !important; // 윈도우 크롬 등에서 스크롤바 숨기기 }
+.main_bottom ul li{
+    list-style: none;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+}
+.active{
+    padding: 5px 15px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.main_left{
+    width: 130px;
+    height: 80px;
+    background-color: #ffc600;
+    border-radius: 0 0 0 10px;
+    order: 1;
+    align-self: flex-end;
+    position: relative;
+    cursor: pointer;
+}
+.main_left h4{
+    color: white;
+    position: absolute;
+    left: 25px;
+}
+.main_left input{
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    padding-left: 5px;
+    border: none;
+    font-size: 1.2rem;
+    display: none;
+}
+
+.main_right{
+    width: 130px;
+    height: 80px;
+    border: 1px solid #ffc600;
+    border-radius: 0 10px 0 0;
+    order: 3;
+    margin-top: 20px;
+    position: relative;
+    cursor: pointer;
+}
+.main_right h4{
+    color: #ffc600;
+    position: absolute;
+    bottom: -5px;
+    right: 25px;
+}
