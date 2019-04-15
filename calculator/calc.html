@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<style>
+    html, body {
+        margin : 0;
+        padding : 0;
+        height : 100%;
+    }
+    body {
+        display : flex;
+        align-items : center;
+    }
+    #frm {
+        display : flex;
+        margin : 0 auto;
+        justify-content: center;
+        align-items: center;
+    }
+    #frm table {
+        background-color : #333;
+    }
+    th {
+        padding-right : 20px;
+    }
+    th input {
+        font-size : 30px;
+        width : 100%;
+        height : 75px;
+        border : none;
+        color : white; 
+        background-color : #333;
+        margin-right : 20px;
+        text-align : right;
+    }
+    tr td {
+        text-align : center;
+        margin : 0;
+        padding : 0;
+    }
+    tr td input[type="button"] {
+        font-size : 30px;
+        width : 100%;
+        height : 75px;
+        color : #333;
+    }
+    tr td:last-child input {
+        color : white;
+        background-color : orange;
+    }
+</style>
+<body>
+    <form id="frm">
+        <table>
+            <tr>
+                <th colspan="4"><input type="text" id="result" value="0"></th>
+            </tr>
+            <tr>
+                <td><input type="button" class="cal_btn" value="7"></td>
+                <td><input type="button" class="cal_btn" value="8"></td>
+                <td><input type="button" class="cal_btn" value="9"></td>
+                <td><input type="button" class="op_btn" value="+"></td>
+            </tr>
+            <tr>
+                <td><input type="button" class="cal_btn" value="4"></td>
+                <td><input type="button" class="cal_btn" value="5"></td>
+                <td><input type="button" class="cal_btn" value="6"></td>
+                <td><input type="button" class="op_btn" value="-"></td>
+            </tr>
+            <tr>
+                <td><input type="button" class="cal_btn" value="1"></td>
+                <td><input type="button" class="cal_btn" value="2"></td>
+                <td><input type="button" class="cal_btn" value="3"></td>
+                <td><input type="button" class="op_btn" value="*"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="0"></td>
+                <td><input type="button" class="op_btn" value="%"></td>
+                <td><input type="button" class="op_btn" value="/"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" class="clr_btn" value="clear"></td>
+                <td colspan="2"><input type="button" class="op_btn" value="="></td>
+            </tr>
+        </table>
+    </form>
+
+<script>
+
+    let result_btn = document.getElementById("result").value;
+
+    function clear() {
+        result_btn = 0;
+    }
+
+    function calc(val) {
+        
+        if(result_btn === 0) {
+            result_btn = "";
+        }
+
+        result_btn += val;
+    }
+
+    function init() {
+        const inp_btn = document.querySelectorAll("input[type=button]"),
+              clr_btn = document.querySelector(".clr_btn"); 
+
+        
+
+        // 계산
+        for(let i = 0; i < inp_btn.length; i++) {
+
+            inp_btn[i].addEventListener("click", function() {
+                if(this.value !== "clear" && this.value !== "=") {
+                    console.log(this.value);
+                    calc(this.value);
+                }
+            });
+        }
+
+        // 초기화
+        clr_btn.addEventListener("click", function() {
+            clear();
+        });
+    }
+
+    init();
+</script>
+</body>
+</html>
