@@ -58,7 +58,7 @@
     <form id="frm">
         <table>
             <tr>
-                <th colspan="4"><input type="text" id="result" value="0"></th>
+                <th colspan="4"><input type="text" id="result_btn" value="0"></th>
             </tr>
             <tr>
                 <td><input type="button" class="cal_btn" value="7"></td>
@@ -90,47 +90,6 @@
         </table>
     </form>
 
-<script>
-
-    let result_btn = document.getElementById("result").value;
-
-    function clear() {
-        result_btn = 0;
-    }
-
-    function calc(val) {
-        
-        if(result_btn === 0) {
-            result_btn = "";
-        }
-
-        result_btn += val;
-    }
-
-    function init() {
-        const inp_btn = document.querySelectorAll("input[type=button]"),
-              clr_btn = document.querySelector(".clr_btn"); 
-
-        
-
-        // 계산
-        for(let i = 0; i < inp_btn.length; i++) {
-
-            inp_btn[i].addEventListener("click", function() {
-                if(this.value !== "clear" && this.value !== "=") {
-                    console.log(this.value);
-                    calc(this.value);
-                }
-            });
-        }
-
-        // 초기화
-        clr_btn.addEventListener("click", function() {
-            clear();
-        });
-    }
-
-    init();
-</script>
+<script src="calc.js"></script>
 </body>
 </html>
