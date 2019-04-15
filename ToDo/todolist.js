@@ -83,13 +83,11 @@ function handleSubmit(e){
 function loadTodos(){ // 기존에 존재하는 값이 있다면
     
     const todos = localStorage.getItem(TODOS);
-    console.log(todos)
 
     if(todos !== null){
 
         const parsedTodoArr = JSON.parse(todos);
         
-        console.log(parsedTodoArr);
         parsedTodoArr.forEach( v => showTodos(v.text) );
     }
 }
@@ -102,9 +100,3 @@ function init(){
 }
 
 init();
-
-/* 추가해야할 것
-    날짜 변경(달력)
-    delete 처리되게 하기
-    반응형 처리하기
- */

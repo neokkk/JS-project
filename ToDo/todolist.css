@@ -53,6 +53,7 @@ header h1 span{
 }
 .main_top .icon-color{
     color: #ffc600;
+    cursor : pointer;
 }
 
 .main_bottom{
