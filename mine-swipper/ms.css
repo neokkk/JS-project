@@ -1,0 +1,23 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: lightgray;
+}
+
+.m_input {
+    margin: 50px auto;
+}
