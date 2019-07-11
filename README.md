@@ -1,5 +1,5 @@
 # JS-project
-## JavaScript Project Archive
+JavaScript Project Archive
 
     | Baseball game
     | Calculator
