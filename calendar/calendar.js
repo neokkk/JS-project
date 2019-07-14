@@ -68,3 +68,9 @@ Calendar.printCalendar();
 
 document.querySelector('#prevMonth').addEventListener('click', () => Calendar.prevMonth());
 document.querySelector('#nextMonth').addEventListener('click', () => Calendar.nextMonth());
+
+Array.prototype.forEach.call(document.querySelectorAll('td'), tds => {
+    tds.addEventListener('click', e => {
+        console.log(e.target);
+    });
+});
