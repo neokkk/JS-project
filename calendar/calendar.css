@@ -67,3 +67,8 @@ main {
     height: 60px;
     background-color: white;
 }
+
+#calendarTable .today {
+    color: purple;
+    font-weight: bold;
+}

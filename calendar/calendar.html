@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./calendar.css">
     <link rel="stylesheet"  href="//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css">
+    <script src="./Web.json"></script>
     <title>Job Scheduler</title>
 </head>
 <body>
@@ -16,15 +17,19 @@
     </header>
     <main>
         <table id='calendarTable'>
-            <tr>
-                <th>일</td>
-                <th>월</th>
-                <th>화</th>
-                <th>수</th>
-                <th>목</th>
-                <th>금</th>
-                <th>토</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>일</td>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                    <th>토</th>
+                </tr>
+            </thead>
+            <tbody id="calendarTbody">
+            </tbody>
         </table>
     </main>
     <script src='./calendar.js'></script>
