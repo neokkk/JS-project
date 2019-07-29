@@ -42,6 +42,10 @@ const holidays = [
     {
 		"date": "2019-07-17",
 		"event": "뿡빵"
+    },
+    {
+		"date": "2019-07-17",
+		"event": "뿡빵222"
     }
 ];
 
@@ -55,7 +59,7 @@ const formatDate = date => {
 
 // 달력 생성 객체
 const Calendar = {
-    today : new Date(),
+    today: new Date(),
     todayRemember: new Date(), // 오늘 날짜 기억해두기
 
     // 달력 출력 메서드
@@ -97,7 +101,8 @@ const Calendar = {
             const dateValidation = new Date(this.today.getFullYear(), this.today.getMonth(), i).toDateString();
             const dateString = `${this.today.getFullYear()}-${formatDate(this.today.getMonth() + 1)}-${formatDate(i)}`; // 날짜 포맷 변경
 
-            const holiday = holidays.find(v => v.date === dateString); // 기념일 검사
+            const holiday = holidays.filter(v => v.date === dateString); // 기념일 검사
+            console.log(holiday);
 
             const td = document.createElement('td'),
                   span = document.createElement('span'),
@@ -107,7 +112,7 @@ const Calendar = {
             
             span.innerText = i;
             div.classList.add('info');
-            div.innerHTML = holiday ? holiday.event : '';
+            div.innerHTML = holiday[0] ? holiday.map(h => h.event) : '';
             td.appendChild(span);
             td.appendChild(div);
             tr.appendChild(td);
@@ -128,8 +133,8 @@ const Calendar = {
         if (lastCount < 6) {
             for (let i = 0; i < 6 - lastCount; i++) {
                 const td = document.createElement('td'),
-                  span = document.createElement('span'),
-                  div = document.createElement('div');
+                      span = document.createElement('span'),
+                      div = document.createElement('div');
                   
                 span.innerText = i + 1;
                 span.style.opacity = '0.5';
@@ -140,6 +145,16 @@ const Calendar = {
                 tr.appendChild(td);
             }
         }
+
+        // 클릭하면 일정 표시
+        Array.prototype.forEach.call(document.querySelectorAll('.info'), info => {
+            info.addEventListener('click', e => {
+                if (e.target.innerText) {
+                    console.log(e.target.innerText);
+                    alert(e.target.innerText);
+                }
+            });
+        });
     },
 
     // 이전 달 출력 메서드
@@ -173,14 +188,3 @@ Calendar.printCalendar();
 
 document.querySelector('#prevMonth').addEventListener('click', () => Calendar.prevMonth());
 document.querySelector('#nextMonth').addEventListener('click', () => Calendar.nextMonth());
-
-// 클릭하면 일정 표시
-Array.prototype.forEach.call(document.querySelectorAll('.info'), info => {
-    info.addEventListener('click', e => {
-        if (e.target.innerText) {
-            console.log(e.target.innerText);
-            alert(e.target.innerText);
-        }
-    });
-});
-
