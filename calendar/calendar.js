@@ -112,7 +112,7 @@ const Calendar = {
             
             span.innerText = i;
             div.classList.add('info');
-            div.innerHTML = holiday[0] ? holiday.map(h => h.event) : '';
+            div.innerText = holiday[0] ? holiday.map(h => h.event) : '';
             td.appendChild(span);
             td.appendChild(div);
             tr.appendChild(td);
